@@ -18,16 +18,18 @@ def plot_image(image, trueLabel=None, predictedLabel=None):
     plt.show()
 
 def main(argv):
+    # get image path
     if len(argv) < 2:
         print('requires image path argument')
         return
+    img_dir = argv[1]
 
+    # get model directory
     if len(argv) < 3:
         model_dir = model.DEFAULT_DIR
     else:
         model_dir = argv[2]
 
-    img_dir = argv[1]
     img = Image.open(img_dir)
     # format data for model
     img_data = np.array(img.getdata(), np.uint8) / 255.0
@@ -36,6 +38,7 @@ def main(argv):
     # build model
     classifier = tf.estimator.Estimator(model_fn=model.model_fn, model_dir=model_dir)
 
+    # input function for prediction
     predict_input_fn = tf.estimator.inputs.numpy_input_fn(
         x={'x': img_data},
         y=None,
@@ -43,10 +46,11 @@ def main(argv):
         num_epochs=None,
         shuffle=False)
 
+    # get prediction results
     predict_results = classifier.predict(input_fn=predict_input_fn)
-
     res = next(predict_results)
     predict_label = model.CLASSES[np.argmax(res['probabilities'])]
+    # plot image with prediction
     plot_image(np.reshape(img_data, [32, 32, 3]), None, predict_label)
 
 if __name__ == '__main__':
