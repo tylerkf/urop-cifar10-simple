@@ -3,6 +3,7 @@ Simple convolutional neural network for my UROP.
 
 ### Training
 Run train.py with the model path as a parameter.
+
 Default path is '/tmp/cifar10_model'.
 
 ### Prediction
