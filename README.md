@@ -1,14 +1,20 @@
 # Simple CIFAR-10 Neural Network for UROP 2018
-Simple convolutional neural network for my UROP.
+Simple convolutional neural network for my UROP. Built using the tensorflow's estimator API.
+
+### Setup
+Run `pip install -r requirements.txt`.
+
+All code was developed and tested with Python 3.6 on macOS High Sierra.
 
 ### Training
-Run train.py with the model path as a parameter.
+Run `train.py` with the model path as a parameter.
 
-Default path is '/tmp/cifar10_model'.
+Default path is `/tmp/cifar10_model`.
 
 ### Prediction
-Run predict.py with the image path as its first parameter (must be 32x32 RGB) and model path as its second.
+Run `predict.py` with the mode directory as its first parameter (optional) and image path as its second (must be 32x32 RGB).
+
+`./model` contains a pre-trained model with 70% accuracy
 
 ## Model
-Simple CNN structure with entire 32x32 image as input and no pre processing on the dataset.
 Model structure and parameters are taken from [this tensorflow tutorial](https://www.tensorflow.org/tutorials/deep_cnn).
